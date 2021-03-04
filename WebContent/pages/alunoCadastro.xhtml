@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+
+		<f:metadata>
+			<f:viewParam name="aluAcao" value="#{alunoBean.acao}" />
+			<f:viewParam name="aluCod" value="#{alunoBean.codigo}" />
+
+			<f:event listener="#{alunoBean.carregarCadastro}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmAlunoCad">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Perfil do aluno" style="font-size:16px;" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:panelGrid id="pnlAlunoCadDados" columns="4" >
+				<p:outputLabel value="Código:" />
+				<p:inputText size="10" readonly="true"
+					value="#{alunoBean.alunoCadastro.idAluno}" />
+
+				<p:outputLabel value="Nome do aluno:" />
+				<p:inputText maxlength="45" size="45" 
+					value="#{alunoBean.alunoCadastro.nomeAluno}"
+					readonly="#{alunoBean.acao == 'Excluir'}" >
+					<f:validateBean />
+					
+                				</p:inputText>
+				
+				<p:outputLabel value="Data de nascimento:" />
+				<p:inputMask mask="99/99/9999" size="6"
+					value="#{alunoBean.alunoCadastro.dtNascimento}">
+					<f:validateBean />
+				</p:inputMask>
+
+				<p:outputLabel value="N° identidade:" />
+				<p:inputMask mask="9999999999" size="20"
+					value="#{alunoBean.alunoCadastro.nIdentidade}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+					<f:validateBean />
+
+				</p:inputMask>
+
+				<p:outputLabel value="CPF:" />
+				<p:inputMask mask="999.999.999-99"
+					value="#{alunoBean.alunoCadastro.nCpf}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputMask>
+
+				<p:outputLabel value="Telefone 1:" />
+				<p:inputMask mask="(99)99999-9999"
+					value="#{alunoBean.alunoCadastro.telefone1}"
+					readonly="#{alunoBean.acao == 'Excluir'}" >
+					<f:validateBean />
+				</p:inputMask>
+
+				<p:outputLabel value="Telefone 2:" />
+				<p:inputMask mask="(99)99999-9999"
+					value="#{alunoBean.alunoCadastro.telefone2}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputMask>
+
+
+				<p:outputLabel value="E-mail:" />
+				<p:inputText maxlength="45" size="20"
+					value="#{alunoBean.alunoCadastro.email}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+
+				</p:inputText>
+
+				<p:outputLabel value="Situação:" />
+				<p:selectOneMenu style="width:158px;"
+					value="#{alunoBean.alunoCadastro.situacao}"
+					disabled="#{usuarioBean.acao == 'Excluir' or alunoBean.alunoCadastro.situacao == 'Matriculado'}">
+					<f:selectItem itemLabel="Selecione a situação" itemValue="" />
+					<f:selectItem itemLabel="Não matriculado"
+						itemValue="Não matriculado" />
+					<f:selectItem itemLabel="Matriculado" itemValue="Matriculado"
+						itemDisabled="#{alunoBean.alunoCadastro.situacao == null or alunoBean.alunoCadastro.situacao == 'Não matriculado'}" />
+				<f:selectItem itemLabel="Não matriculado (Cancelado)" itemValue="Não matriculado (Cancelado)"
+						itemDisabled="#{alunoBean.alunoCadastro.situacao == null or alunoBean.alunoCadastro.situacao == 'Não matriculado'}" />
+				
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Naturalidade:" />
+				<p:inputText maxlength="20" size="20"
+					value="#{alunoBean.alunoCadastro.naturalidade}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+					
+				</p:inputText>
+
+				<p:outputLabel value="Estado:" />
+				<p:inputText maxlength="20" size="20"
+					value="#{alunoBean.alunoCadastro.estado}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+				</p:inputText>
+
+				<p:outputLabel value="Cidade:" />
+				<p:inputText maxlength="20" size="20"
+					value="#{alunoBean.alunoCadastro.cidade}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+				</p:inputText>
+
+				<p:outputLabel value="Bairro:" />
+				<p:inputText maxlength="20" size="20"
+					value="#{alunoBean.alunoCadastro.bairro}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+				</p:inputText>
+
+
+				<p:outputLabel value="Rua:" />
+				<p:inputText maxlength="20" size="20"
+					value="#{alunoBean.alunoCadastro.rua}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+				</p:inputText>
+
+             
+				<p:outputLabel value="Complemento:" />
+				
+				<p:inputText maxlength="150" size="50"
+					value="#{alunoBean.alunoCadastro.complemento}"
+					readonly="#{alunoBean.acao == 'Excluir'}">
+				</p:inputText>
+             
+
+			</h:panelGrid>
+			
+             <br></br>
+             <br></br>
+             <br></br>
+
+			<h:panelGrid columns="5">
+				<p:commandButton value="Novo" actionListener="#{alunoBean.novo}"
+					update=":frmAlunoCad:pnlAlunoCadDados"
+					rendered="#{alunoBean.acao == 'Novo'}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{cadastroBean.salvar}"
+					action="#{alunoBean.salvar}"
+					update=":msgGlobal :frmAlunoCad:pnlAlunoCadDados"
+					rendered="#{alunoBean.acao == 'Novo'}" />
+				<p:commandButton value="Voltar" 
+					action="/pages/alunoPesquisa.xhtml?faces-redirect=true"
+					immediate="true" />
+
+				<p:commandButton value="Editar" actionListener="#{alunoBean.editar}"
+					update=":msgGlobal" rendered="#{alunoBean.acao == 'Editar'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{alunoBean.excluir}" update=" :msgGlobal"
+					rendered="#{alunoBean.acao == 'Excluir'}" />
+			</h:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
